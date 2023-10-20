@@ -1,3 +1,6 @@
+using CadastroPessoas.Infraestrutura;
+using CadastroPessoas.Model;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Injecao de Dependencias do repositorio
+builder.Services.AddTransient<IPessoasRespository, PessoasRepository>();
 
 var app = builder.Build();
 
