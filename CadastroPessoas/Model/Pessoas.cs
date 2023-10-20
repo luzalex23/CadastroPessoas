@@ -7,7 +7,7 @@ namespace CadastroPessoas.Model
     public class Pessoas
     {
         [Key]
-        public int IdPessoa { get; private set; }
+        public int idPessoa { get; private set; }
         public string name {  get; private set; }
         public int age {  get; private set; }
         public string? photo {  get; private set; }
