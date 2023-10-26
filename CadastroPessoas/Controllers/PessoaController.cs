@@ -1,18 +1,19 @@
 ﻿using CadastroPessoas.Model;
 using CadastroPessoas.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace CadastroPessoas.Controllers
 {
     [ApiController]
-    [Route("api/vc/pessoa")]
+    [Route("api/v1/pessoa")]
     public class PessoaController : ControllerBase
     {
         private readonly IPessoasRespository _pessoasRespository;
 
         public PessoaController(IPessoasRespository pessoasRespository)
         {
-            _pessoasRespository = pessoasRespository ?? throw new ArgumentNullException(nameof(pessoasRespository)); 
+            _pessoasRespository = pessoasRespository ?? throw new ArgumentNullException(nameof(pessoasRespository));
         }
 
         [HttpPost]
@@ -22,11 +23,51 @@ namespace CadastroPessoas.Controllers
             _pessoasRespository.Add(p);
             return Ok();
         }
+
         [HttpGet]
-         public IActionResult FindAll() 
+        public IActionResult FindAll()
         {
             var p = _pessoasRespository.Get();
             return Ok(p);
+        }
+
+        [HttpPut]
+        public IActionResult Update(int pessoaId, PessoaViewModel pessoaView)
+        {
+            var existingPessoa = _pessoasRespository.Get().FirstOrDefault(p => p.idPessoa == pessoaId);
+
+            if (existingPessoa == null)
+            {
+                return NotFound(); // Retorna 404 Not Found se a pessoa não existir.
+            }
+
+
+            _pessoasRespository.Update(existingPessoa);
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int pessoaId)
+        {
+            var existingPessoa = _pessoasRespository.Get().FirstOrDefault(p => p.idPessoa == pessoaId);
+
+            if (existingPessoa == null)
+            {
+                return NotFound(); // Retorna 404 Not Found se a pessoa não existir.
+            }
+
+            _pessoasRespository.Delete(pessoaId);
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetByName")]
+        public IActionResult GetByName(string nome)
+        {
+            var pessoas = _pessoasRespository.GetByName(nome);
+            return Ok(pessoas);
         }
     }
 }
