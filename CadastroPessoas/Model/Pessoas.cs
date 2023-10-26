@@ -7,6 +7,8 @@ namespace CadastroPessoas.Model
     public class Pessoas
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public int idPessoa { get; private set; }
         public string name {  get; private set; }
         public int age {  get; private set; }

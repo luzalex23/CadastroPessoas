@@ -10,11 +10,9 @@ namespace CadastroPessoas.Infraestrutura
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql(
                 "Server = localhost;" +
-                "Port = 5432;Database=developer;" +
-                "User Id=postegres;" +
-                "Password=root12345"
-
-                );
+                "Port = 5433;Database=developer;" +
+                "User Id=postgres;" +
+                "Password=root12345;");
    
 
     }
