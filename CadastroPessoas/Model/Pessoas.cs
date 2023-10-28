@@ -22,6 +22,9 @@ namespace CadastroPessoas.Model
 
         }
 
+        public Pessoas()
+        {
+        }
     }
     
 }

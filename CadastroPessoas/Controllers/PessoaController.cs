@@ -1,5 +1,6 @@
-﻿using CadastroPessoas.Model;
-using CadastroPessoas.ViewModel;
+﻿using CadastroPessoas.Application.ViewModel;
+using CadastroPessoas.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -15,7 +16,7 @@ namespace CadastroPessoas.Controllers
         {
             _pessoasRespository = pessoasRespository ?? throw new ArgumentNullException(nameof(pessoasRespository));
         }
-
+        [Authorize]
         [HttpPost]
         public IActionResult Add([FromForm] PessoaViewModel pessoaView)
         {
@@ -29,14 +30,14 @@ namespace CadastroPessoas.Controllers
             _pessoasRespository.Add(p);
             return Ok();
         }
-
+        [Authorize]
         [HttpGet]
         public IActionResult FindAll()
         {
             var p = _pessoasRespository.Get();
             return Ok(p);
         }
-
+        [Authorize]
         [HttpPut]
         public IActionResult Update(int pessoaId, PessoaViewModel pessoaView)
         {
@@ -52,7 +53,7 @@ namespace CadastroPessoas.Controllers
 
             return Ok();
         }
-
+        [Authorize]
         [HttpDelete]
         public IActionResult Delete(int pessoaId)
         {
@@ -67,7 +68,7 @@ namespace CadastroPessoas.Controllers
 
             return Ok();
         }
-
+        [Authorize]
         [HttpGet]
         [Route("GetByName")]
         public IActionResult GetByName(string nome)
@@ -75,6 +76,7 @@ namespace CadastroPessoas.Controllers
             var pessoas = _pessoasRespository.GetByName(nome);
             return Ok(pessoas);
         }
+        [Authorize]
         [HttpPost]
         [Route("{id}/download")]
         public IActionResult DownloadPhoto(int id)
