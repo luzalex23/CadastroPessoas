@@ -17,9 +17,15 @@ namespace CadastroPessoas.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(PessoaViewModel pessoaView)
+        public IActionResult Add([FromForm] PessoaViewModel pessoaView)
         {
-            var p = new Pessoas(pessoaView.Name, pessoaView.Age, null);
+            var filePath = Path.Combine("Storage", pessoaView.Photo.FileName);
+            var p = new Pessoas(pessoaView.Name, pessoaView.Age, filePath);
+            using Stream fileStream = new FileStream(filePath, FileMode.Create);
+            pessoaView.Photo.CopyTo(fileStream);
+
+
+
             _pessoasRespository.Add(p);
             return Ok();
         }
