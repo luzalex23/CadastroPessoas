@@ -35,5 +35,9 @@ namespace CadastroPessoas.Infraestrutura
             return _context.Pessoas.Where(p => p.name == nome).ToList();
         }
 
+        public Pessoas? Get(int pessoaId)
+        {
+            return _context.Pessoas.Find(pessoaId);
+        }
     }
 }

@@ -75,5 +75,15 @@ namespace CadastroPessoas.Controllers
             var pessoas = _pessoasRespository.GetByName(nome);
             return Ok(pessoas);
         }
+        [HttpPost]
+        [Route("{id}/download")]
+        public IActionResult DownloadPhoto(int id)
+        {
+            var pessoa = _pessoasRespository.Get(id);
+
+            var dataBytes = System.IO.File.ReadAllBytes(pessoa.photo);
+
+            return File(dataBytes, "image/png");
+        }
     }
 }

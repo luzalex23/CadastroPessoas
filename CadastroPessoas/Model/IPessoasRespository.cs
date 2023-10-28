@@ -8,5 +8,7 @@
         List<Pessoas> GetByName(string nome);
 
         List<Pessoas> Get();
+
+        Pessoas? Get(int pessoaId);
     }
 }
