@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CadastroPessoas.Model
+namespace CadastroPessoas.Domain.Model
 {
     [Table("pessoas")]
     public class Pessoas
@@ -10,9 +10,9 @@ namespace CadastroPessoas.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
         public int idPessoa { get; private set; }
-        public string name {  get; private set; }
-        public int age {  get; private set; }
-        public string? photo {  get; private set; }
+        public string name { get; private set; }
+        public int age { get; private set; }
+        public string? photo { get; private set; }
 
         public Pessoas(string name, int age, string? photo)
         {
@@ -21,11 +21,11 @@ namespace CadastroPessoas.Model
             this.photo = photo;
 
         }
-        
+
 
         public Pessoas()
         {
         }
     }
-    
+
 }

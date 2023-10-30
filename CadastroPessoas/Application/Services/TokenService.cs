@@ -1,4 +1,4 @@
-﻿using CadastroPessoas.Model;
+﻿using CadastroPessoas.Domain.Model;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

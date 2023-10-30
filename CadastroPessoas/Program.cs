@@ -1,5 +1,5 @@
-using CadastroPessoas.Infraestrutura;
-using CadastroPessoas.Model;
+using CadastroPessoas.Domain.Model;
+using CadastroPessoas.Infraestrutura.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;

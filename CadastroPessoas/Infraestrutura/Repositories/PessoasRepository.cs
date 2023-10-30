@@ -1,4 +1,5 @@
-﻿using CadastroPessoas.Model;
+﻿using CadastroPessoas.Domain.DTOs;
+using CadastroPessoas.Domain.Model;
 
 namespace CadastroPessoas.Infraestrutura
 {
@@ -40,9 +41,16 @@ namespace CadastroPessoas.Infraestrutura
             return _context.Pessoas.Find(pessoaId);
         }
 
-        public List<Pessoas> Get(int pageNumber, int pageQuantity)
+        public List<PessoasDTO> Get(int pageNumber, int pageQuantity)
         {
-            return _context.Pessoas.Skip(pageNumber * pageQuantity).Take(pageQuantity).ToList();
+            return _context.Pessoas.Skip(pageNumber * pageQuantity).Take(pageQuantity)
+                .Select(p =>new PessoasDTO()
+                {
+                    PessoaId = p.idPessoa,
+                    NomePessoa = p.name,
+                    Photo = p.photo,
+                })
+                .ToList();
         }
     }
 }

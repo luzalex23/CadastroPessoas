@@ -1,4 +1,6 @@
-﻿namespace CadastroPessoas.Model
+﻿using CadastroPessoas.Domain.DTOs;
+
+namespace CadastroPessoas.Domain.Model
 {
     public interface IPessoasRespository
     {
@@ -7,7 +9,7 @@
         void Delete(int pessoaId);
         List<Pessoas> GetByName(string nome);
 
-        List<Pessoas> Get(int pageNumber, int pageQuantity);
+        List<PessoasDTO> Get(int pageNumber, int pageQuantity);
 
         Pessoas? Get(int pessoaId);
     }
