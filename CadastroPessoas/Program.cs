@@ -1,3 +1,4 @@
+using CadastroPessoas.Application.Mapping;
 using CadastroPessoas.Domain.Model;
 using CadastroPessoas.Infraestrutura.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -12,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(DomainToDTOMapping));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen( c =>

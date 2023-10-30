@@ -12,7 +12,7 @@ namespace CadastroPessoas.Controllers
         {
             if(username == "alexsandro" &&  password == "12345")
             {
-                var token = TokenService.GenetateToken(new Model.Pessoas());
+                var token = TokenService.GenetateToken(new Domain.Model.Pessoas());
                 return Ok(token);
             }
             return BadRequest("Username or Password invalid");
