@@ -21,6 +21,7 @@ namespace CadastroPessoas.Model
             this.photo = photo;
 
         }
+        
 
         public Pessoas()
         {

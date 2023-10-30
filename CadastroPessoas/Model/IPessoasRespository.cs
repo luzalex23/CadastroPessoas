@@ -7,7 +7,7 @@
         void Delete(int pessoaId);
         List<Pessoas> GetByName(string nome);
 
-        List<Pessoas> Get();
+        List<Pessoas> Get(int pageNumber, int pageQuantity);
 
         Pessoas? Get(int pessoaId);
     }

@@ -30,24 +30,28 @@ namespace CadastroPessoas.Controllers
             _pessoasRespository.Add(p);
             return Ok();
         }
-        [Authorize]
         [HttpGet]
-        public IActionResult FindAll()
+        public IActionResult FindAll(int pageNumber, int pageQuantity)
         {
-            var p = _pessoasRespository.Get();
+            var p = _pessoasRespository.Get(pageNumber, pageQuantity);
             return Ok(p);
         }
         [Authorize]
         [HttpPut]
-        public IActionResult Update(int pessoaId, PessoaViewModel pessoaView)
+        public IActionResult Update([FromForm] PessoaViewModel pessoaView, int pessoaId)
         {
-            var existingPessoa = _pessoasRespository.Get().FirstOrDefault(p => p.idPessoa == pessoaId);
+            var filePath = Path.Combine("Storage", pessoaView.Photo.FileName);
+            //var p = new Pessoas(pessoaView.Name, pessoaView.Age, filePath);
+            var existingPessoa = _pessoasRespository.Get(pessoaId);
+            using Stream fileStream = new FileStream(filePath, FileMode.Create);
+            pessoaView.Photo.CopyTo(fileStream);
+
+
 
             if (existingPessoa == null)
             {
                 return NotFound(); // Retorna 404 Not Found se a pessoa não existir.
             }
-
 
             _pessoasRespository.Update(existingPessoa);
 
@@ -57,7 +61,8 @@ namespace CadastroPessoas.Controllers
         [HttpDelete]
         public IActionResult Delete(int pessoaId)
         {
-            var existingPessoa = _pessoasRespository.Get().FirstOrDefault(p => p.idPessoa == pessoaId);
+            var existingPessoa = _pessoasRespository.Get(pessoaId);
+
 
             if (existingPessoa == null)
             {
@@ -87,5 +92,6 @@ namespace CadastroPessoas.Controllers
 
             return File(dataBytes, "image/png");
         }
+
     }
 }

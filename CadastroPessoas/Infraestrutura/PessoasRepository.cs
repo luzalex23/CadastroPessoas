@@ -39,5 +39,10 @@ namespace CadastroPessoas.Infraestrutura
         {
             return _context.Pessoas.Find(pessoaId);
         }
+
+        public List<Pessoas> Get(int pageNumber, int pageQuantity)
+        {
+            return _context.Pessoas.Skip(pageNumber * pageQuantity).Take(pageQuantity).ToList();
+        }
     }
 }
