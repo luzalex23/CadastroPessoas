@@ -1,7 +1,7 @@
 ﻿using CadastroPessoas.Domain.DTOs;
 using CadastroPessoas.Domain.Model;
 
-namespace CadastroPessoas.Infraestrutura
+namespace CadastroPessoas.Infraestrutura.Repositories
 {
     public class PessoasRepository : IPessoasRespository
     {
@@ -10,7 +10,7 @@ namespace CadastroPessoas.Infraestrutura
         {
             _context.Pessoas.Add(pessoas);
             _context.SaveChanges();
-         }
+        }
 
         public List<Pessoas> Get()
         {
@@ -44,7 +44,7 @@ namespace CadastroPessoas.Infraestrutura
         public List<PessoasDTO> Get(int pageNumber, int pageQuantity)
         {
             return _context.Pessoas.Skip(pageNumber * pageQuantity).Take(pageQuantity)
-                .Select(p =>new PessoasDTO()
+                .Select(p => new PessoasDTO()
                 {
                     PessoaId = p.idPessoa,
                     NomePessoa = p.name,

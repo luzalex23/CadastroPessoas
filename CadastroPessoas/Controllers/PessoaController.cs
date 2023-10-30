@@ -1,4 +1,6 @@
-﻿using CadastroPessoas.Application.ViewModel;
+﻿using AutoMapper;
+using CadastroPessoas.Application.ViewModel;
+using CadastroPessoas.Domain.DTOs;
 using CadastroPessoas.Domain.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +14,8 @@ namespace CadastroPessoas.Controllers
     {
         private readonly IPessoasRespository _pessoasRespository;
         private readonly ILogger<PessoaController> _logger;
+        private readonly IMapper _mapper;
+
 
 
         public PessoaController(IPessoasRespository pessoasRespository, ILogger<PessoaController> logger)
@@ -98,6 +102,14 @@ namespace CadastroPessoas.Controllers
             var dataBytes = System.IO.File.ReadAllBytes(pessoa.photo);
 
             return File(dataBytes, "image/png");
+        }
+        [HttpGet]
+        [Route("GetById")]
+        public IActionResult GetById(int id)
+        {
+            var pessoas = _pessoasRespository.Get(id);
+            var pessoasDTOS = _mapper.Map <PessoasDTO>(pessoas);
+            return Ok(pessoasDTOS);
         }
 
     }
