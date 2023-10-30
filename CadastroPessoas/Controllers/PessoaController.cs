@@ -1,5 +1,5 @@
 ﻿using CadastroPessoas.Application.ViewModel;
-using CadastroPessoas.Model;
+using CadastroPessoas.Domain.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

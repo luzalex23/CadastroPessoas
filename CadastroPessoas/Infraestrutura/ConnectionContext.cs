@@ -1,4 +1,4 @@
-﻿using CadastroPessoas.Model;
+﻿using CadastroPessoas.Domain.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace CadastroPessoas.Infraestrutura
