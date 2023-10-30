@@ -11,10 +11,13 @@ namespace CadastroPessoas.Controllers
     public class PessoaController : ControllerBase
     {
         private readonly IPessoasRespository _pessoasRespository;
+        private readonly ILogger<PessoaController> _logger;
 
-        public PessoaController(IPessoasRespository pessoasRespository)
+
+        public PessoaController(IPessoasRespository pessoasRespository, ILogger<PessoaController> logger)
         {
             _pessoasRespository = pessoasRespository ?? throw new ArgumentNullException(nameof(pessoasRespository));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
         [Authorize]
         [HttpPost]
@@ -50,6 +53,10 @@ namespace CadastroPessoas.Controllers
 
             if (existingPessoa == null)
             {
+                _logger.Log(LogLevel.Error, "Pessoa não encontrarda");
+                _logger.LogInformation("Error:");
+
+
                 return NotFound(); // Retorna 404 Not Found se a pessoa não existir.
             }
 
